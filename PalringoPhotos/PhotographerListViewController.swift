@@ -18,6 +18,18 @@ class PhotographersListViewController: UIViewController {
     private lazy var titleLabel = makeTitleLabel()
     private lazy var listView = makeListView()
 
+    private let currentPhotographer: Photographers
+
+    init(currentPhotographer: Photographers) {
+        self.currentPhotographer = currentPhotographer
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,9 +41,7 @@ class PhotographersListViewController: UIViewController {
 private extension PhotographersListViewController {
 
     func setupUI() {
-        view.addSubview(blurEffectView)
-        view.addSubview(titleLabel)
-        view.addSubview(containerView)
+        view.prepareSubviewsForAutolayout(blurEffectView, titleLabel, containerView)
         containerView.addSubview(listView)
         NSLayoutConstraint.activate([
             blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -84,6 +94,10 @@ private extension PhotographersListViewController {
 
     @objc func tappedOnPhotographer(_ sender: UIButton) {
         for photographer in Photographers.allCases where photographer.displayName == sender.title(for: .normal) {
+            guard photographer != PhotographersInstance.shared.currentPhotographer else {
+                completion?()
+                return
+            }
             PhotographersInstance.shared.currentPhotographer = photographer
             completion?()
         }

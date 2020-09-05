@@ -21,44 +21,21 @@ class CommentsDetailsViewController: UIViewController {
     var photo: Photo? {
         didSet {
             guard let photo = photo else { return }
-            self.fetchTask = CachedRequest.request(url: photo.url) { [weak self] data, isCached in
-                    guard let self = self, data != nil else { return }
-                    let img = UIImage(data: data!)
-                    if isCached {
-                        self.imageView.image = img
-                    } else if self.photo == photo {
-                        // UI modifications should be done from main thread
-                        DispatchQueue.main.async {
-                            UIView.transition(with: self.imageView, duration: 1, options: .transitionCrossDissolve, animations: {
-                                self.imageView.image = img
-                            }, completion: nil)
-                        }
-                    }
-            }
-
-            FlickrFetcher().getPhotoComments(for: photo) { [weak self] comments in
-                if comments.isEmpty {
-                    let label = UILabel()
-                    label.text = "No comments"
-                    self?.listView.addArrangedSubview(label)
-                } else {
-                    for comment in comments {
-                        let label = UILabel()
-                        label.numberOfLines = 0
-                        label.attributedText = comment.comment.htmlToAttributedString
-                        self?.listView.addArrangedSubview(label)
-                    }
-                }
+            self.fetchTask = CachedRequest.request(url: photo.url) { [weak self] data, _ in
+                guard let self = self, let data = data else { return }
+                let image = UIImage(data: data)
+                self.photoBackgroundImageView.image = image
             }
         }
     }
 
+    private lazy var photoBackgroundImageView = makePhotoBackgroundImageView()
     private lazy var blurEffectView = makeBlurEffectView()
-    private lazy var backButton = makeBackButton()
-    private lazy var imageView = makeImageView()
-    private lazy var containerView = makeContainerView()
-    private lazy var titleLabel = makeTitleLabel()
-    private lazy var listView = makeListView()
+    private lazy var tableView = makeTableView()
+
+    private lazy var emptyCommentsLabel = makeEmptyCommentsLabel()
+
+    var datasource: CommentDataSource?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,46 +43,28 @@ class CommentsDetailsViewController: UIViewController {
         setupUI()
     }
 
-    @objc func tappedOnBack(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-
 }
 
 private extension CommentsDetailsViewController {
 
     func setupUI() {
-        view.addSubview(blurEffectView)
-        view.addSubview(backButton)
-        containerView.addSubview(imageView)
-        containerView.addSubview(titleLabel)
-        view.addSubview(containerView)
-        containerView.addSubview(listView)
-        NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 48.0),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+        navigationItem.title = "Comments"
 
+        view.prepareSubviewsForAutolayout(photoBackgroundImageView, blurEffectView, tableView, emptyCommentsLabel)
+        NSLayoutConstraint.activate([
             blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
             blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            containerView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 16.0),
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 48.0),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 16.0),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16.0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
 
-            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8.0),
-            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8.0),
-            titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-
-            listView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.0),
-            listView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16.0),
-            listView.widthAnchor.constraint(equalTo: containerView.widthAnchor, constant: -32.0),
-            listView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+            emptyCommentsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            emptyCommentsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyCommentsLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
 
@@ -113,61 +72,61 @@ private extension CommentsDetailsViewController {
 
 private extension CommentsDetailsViewController {
 
+    func makePhotoBackgroundImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }
+
     func makeBlurEffectView() -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         return blurEffectView
     }
 
-    func makeBackButton() -> UIButton {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ic_back"), for: .normal)
-        button.addTarget(self, action: #selector(tappedOnBack), for: .touchUpInside)
-        return button
+    func makeTableView() -> UITableView {
+        let tableView = UITableView()
+        datasource = CommentDataSource(photo: photo)
+        datasource?.tableView = tableView
+        datasource?.completion = { [weak self] isEmpty in
+            if isEmpty {
+                self?.emptyCommentsLabel.text = "There are no comments for this photo"
+            } else {
+                self?.emptyCommentsLabel.fadeOut(with: 0.25)
+            }
+        }
+        tableView.dataSource = datasource
+        tableView.delegate = self
+        tableView.register(CommentCell.self, forCellReuseIdentifier: CommentDataSource.reuseIdentifier)
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        return tableView
     }
 
-    func makeImageView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }
-
-    func makeContainerView() -> UIScrollView {
-        let containerView = UIScrollView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        return containerView
-    }
-
-    func makeTitleLabel() -> UILabel {
+    func makeEmptyCommentsLabel() -> UILabel {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 2
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 24.0, weight: .bold)
         label.textColor = .white
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 24.0, weight: .semibold)
-        label.text = "Comments"
+        label.text = "Fetching comments..."
         return label
     }
 
-    @objc func tappedOnPhotographer(_ sender: UIButton) {
-        for photographer in Photographers.allCases where photographer.displayName == sender.title(for: .normal) {
-            PhotographersInstance.shared.currentPhotographer = photographer
-            completion?()
-        }
+}
+
+extension CommentsDetailsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 16.0
     }
 
-    func makeListView() -> UIStackView {
-        let listView = UIStackView()
-        listView.translatesAutoresizingMaskIntoConstraints = false
-        listView.axis = .vertical
-        listView.distribution = .fillProportionally
-        listView.alignment = .leading
-        listView.spacing = 16.0
-        return listView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
 
 }

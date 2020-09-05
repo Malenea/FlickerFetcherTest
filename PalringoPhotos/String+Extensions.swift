@@ -10,17 +10,11 @@ import Foundation
 
 extension String {
 
-    var htmlToAttributedString: NSAttributedString? {
-        guard let data = data(using: .utf8) else { return nil }
-        do {
-            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            return nil
-        }
-    }
+    func htmlAttributedString() -> NSMutableAttributedString {
+        guard let data = self.data(using: String.Encoding.utf8, allowLossyConversion: false) else { return NSMutableAttributedString() }
 
-    var htmlToString: String {
-        return htmlToAttributedString?.string ?? ""
+        guard let formattedString = try? NSMutableAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil ) else { return NSMutableAttributedString() }
+        return formattedString
     }
 
 }

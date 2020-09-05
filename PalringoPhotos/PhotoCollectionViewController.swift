@@ -12,8 +12,13 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
     
     @IBOutlet weak var imageView: UIImageView!
 
+    public var coordinator: Coordinator?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.modalPresentationStyle = .overCurrentContext
+
         self.title = PhotographersInstance.shared.currentPhotographer.displayName
         imageView.download(from: PhotographersInstance.shared.currentPhotographer.imageURL)
         PhotographersInstance.shared.notifier = { [weak self] photographer in
@@ -21,11 +26,7 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
             self?.imageView.download(from: photographer.imageURL)
         }
         PhotographersInstance.shared.presenter = { [weak self] in
-            let photographersListViewController = PhotographersListViewController()
-            self?.present(photographersListViewController, animated: true, completion: nil)
-            photographersListViewController.completion = {
-                photographersListViewController.dismiss(animated: true, completion: nil)
-            }
+            self?.coordinator?.moveToPhotographersList()
         }
     }
 
@@ -55,13 +56,8 @@ class PhotoCollectionViewController: UICollectionViewController, UICollectionVie
 
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let commentsViewController = CommentsDetailsViewController()
-        commentsViewController.photo = PhotographersInstance.shared.photos[indexPath.section][indexPath.row]
-//        if #available(iOS 13, *) {
-            //
-//        } else {
-//        }
-        present(commentsViewController, animated: true, completion: nil)
+        let currentPhoto = PhotographersInstance.shared.photos[indexPath.section][indexPath.row]
+        coordinator?.moveToPhotoDetailsViewController(with: currentPhoto)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

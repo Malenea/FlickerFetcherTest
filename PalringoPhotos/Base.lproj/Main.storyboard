@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="w0e-Eo-jL6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,7 +10,7 @@
         <!--{Photographer Name}-->
         <scene sceneID="ctv-fE-E48">
             <objects>
-                <collectionViewController id="8nV-Sw-2bH" customClass="PhotoCollectionViewController" customModule="PalringoPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="mainVC" id="8nV-Sw-2bH" customClass="PhotoCollectionViewController" customModule="PalringoPhotos" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="J3M-ja-ULk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,7 +120,8 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HN5-eh-o1v">
                                 <rect key="frame" x="276" y="41" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Change"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="More"/>
                                 <connections>
                                     <action selector="changePhotographer" destination="7eb-Jl-vno" eventType="touchUpInside" id="4lZ-08-Scy"/>
                                 </connections>
@@ -165,24 +166,6 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="804" y="158.77061469265368"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="f1A-g5-Ahf">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="w0e-Eo-jL6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="HaY-fC-lkL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="8nV-Sw-2bH" kind="relationship" relationship="rootViewController" id="ABQ-Lw-mGF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JXi-N1-rX6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-135.19999999999999" y="158.77061469265368"/>
         </scene>
     </scenes>
 </document>

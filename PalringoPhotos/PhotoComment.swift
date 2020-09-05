@@ -13,3 +13,9 @@ struct PhotoComment {
     let author: String
     let comment: String
 }
+
+class Comments {
+    var value: [PhotoComment] = []
+
+    init() { }
+}

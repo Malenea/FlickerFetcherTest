@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		075F3AC41DB0FFE100831312 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F3AC31DB0FFE100831312 /* main.m */; };
-		075F3AC71DB0FFE100831312 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 075F3AC61DB0FFE100831312 /* AppDelegate.m */; };
 		075F3ACD1DB0FFE100831312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075F3ACB1DB0FFE100831312 /* Main.storyboard */; };
 		075F3ACF1DB0FFE100831312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075F3ACE1DB0FFE100831312 /* Assets.xcassets */; };
 		075F3AD21DB0FFE100831312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075F3AD01DB0FFE100831312 /* LaunchScreen.storyboard */; };
@@ -22,6 +20,15 @@
 		07F258211DB3BA8F0077EACA /* PhotoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F258201DB3BA8F0077EACA /* PhotoComment.swift */; };
 		B5586B511DB153B800E82C9B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5586B501DB153B800E82C9B /* GradientView.swift */; };
 		B59C06221DB16D3500425848 /* CachedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59C06211DB16D3500425848 /* CachedRequest.swift */; };
+		FA0EBA072503AA6300D74097 /* NSMutableAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EBA062503AA6300D74097 /* NSMutableAttributedString+Extensions.swift */; };
+		FA0EBA0E2503B29200D74097 /* CommentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EBA0D2503B29200D74097 /* CommentDataSource.swift */; };
+		FA0EBA112503B3A100D74097 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EBA102503B3A100D74097 /* CommentCell.swift */; };
+		FA0EBA132503C8B700D74097 /* CacheComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0EBA122503C8B700D74097 /* CacheComments.swift */; };
+		FA4B8A1E25038D0800FD4959 /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B8A1D25038D0800FD4959 /* PhotoDetailsViewController.swift */; };
+		FA4B8A2025038F0600FD4959 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B8A1F25038F0600FD4959 /* UIView+Extensions.swift */; };
+		FA4B8A232503977400FD4959 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B8A222503977400FD4959 /* Coordinator.swift */; };
+		FA4B8A2525039A7500FD4959 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B8A2425039A7500FD4959 /* AppDelegate.swift */; };
+		FA4B8A292503A7F700FD4959 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4B8A282503A7F700FD4959 /* CommentView.swift */; };
 		FA77CD6A24F122AC00068B1B /* PhotographerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77CD6924F122AC00068B1B /* PhotographerListViewController.swift */; };
 		FA77CD6C24F12A7100068B1B /* PhotographersInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77CD6B24F12A7100068B1B /* PhotographersInstance.swift */; };
 		FA77CD6E24F1318C00068B1B /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77CD6D24F1318C00068B1B /* UIImageView+Extensions.swift */; };
@@ -49,9 +56,6 @@
 /* Begin PBXFileReference section */
 		075B95281DB4B9B400DAFA2F /* ReadMe.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = ReadMe.rtf; sourceTree = "<group>"; };
 		075F3ABF1DB0FFE100831312 /* PalringoPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalringoPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		075F3AC31DB0FFE100831312 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		075F3AC51DB0FFE100831312 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		075F3AC61DB0FFE100831312 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		075F3ACC1DB0FFE100831312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		075F3ACE1DB0FFE100831312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		075F3AD11DB0FFE100831312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,6 +75,15 @@
 		07F258201DB3BA8F0077EACA /* PhotoComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoComment.swift; sourceTree = "<group>"; };
 		B5586B501DB153B800E82C9B /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		B59C06211DB16D3500425848 /* CachedRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachedRequest.swift; sourceTree = "<group>"; };
+		FA0EBA062503AA6300D74097 /* NSMutableAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extensions.swift"; sourceTree = "<group>"; };
+		FA0EBA0D2503B29200D74097 /* CommentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDataSource.swift; sourceTree = "<group>"; };
+		FA0EBA102503B3A100D74097 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		FA0EBA122503C8B700D74097 /* CacheComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheComments.swift; sourceTree = "<group>"; };
+		FA4B8A1D25038D0800FD4959 /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		FA4B8A1F25038F0600FD4959 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		FA4B8A222503977400FD4959 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FA4B8A2425039A7500FD4959 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA4B8A282503A7F700FD4959 /* CommentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		FA77CD6924F122AC00068B1B /* PhotographerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotographerListViewController.swift; sourceTree = "<group>"; };
 		FA77CD6B24F12A7100068B1B /* PhotographersInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotographersInstance.swift; sourceTree = "<group>"; };
 		FA77CD6D24F1318C00068B1B /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -127,37 +140,21 @@
 		075F3AC11DB0FFE100831312 /* PalringoPhotos */ = {
 			isa = PBXGroup;
 			children = (
-				075F3AC51DB0FFE100831312 /* AppDelegate.h */,
-				075F3AC61DB0FFE100831312 /* AppDelegate.m */,
-				075F3ACB1DB0FFE100831312 /* Main.storyboard */,
-				FA77CD7124F1375900068B1B /* String+Extensions.swift */,
-				FA77CD6D24F1318C00068B1B /* UIImageView+Extensions.swift */,
-				FA77CD6B24F12A7100068B1B /* PhotographersInstance.swift */,
-				FA77CD6924F122AC00068B1B /* PhotographerListViewController.swift */,
-				FA77CD6F24F1344400068B1B /* CommentsDetailsViewController.swift */,
-				075F3AF61DB1001D00831312 /* PhotoCollectionViewController.swift */,
-				075F3AF81DB100EF00831312 /* ImageDataSource.swift */,
+				FA0EBA0B2503ACDF00D74097 /* Resources */,
+				FA0EBA082503AB2B00D74097 /* Items */,
+				FA4B8A2125038F9200FD4959 /* Utils+Extensions */,
+				FA0EBA092503AC7900D74097 /* Coordinators */,
+				FA4B8A272503A7EB00FD4959 /* Views */,
+				FA4B8A262503A30200FD4959 /* ViewControllers */,
+				FA0EBA0C2503B23700D74097 /* Datasources */,
 				075F3AFA1DB128A400831312 /* FlickrFetcher.swift */,
 				B59C06211DB16D3500425848 /* CachedRequest.swift */,
-				07F2581C1DB3B5400077EACA /* Photo.swift */,
-				07F258201DB3BA8F0077EACA /* PhotoComment.swift */,
-				07F2581E1DB3B66A0077EACA /* PhotoCell.swift */,
-				B5586B501DB153B800E82C9B /* GradientView.swift */,
-				075F3ACE1DB0FFE100831312 /* Assets.xcassets */,
-				075F3AD01DB0FFE100831312 /* LaunchScreen.storyboard */,
+				FA0EBA122503C8B700D74097 /* CacheComments.swift */,
+				FA4B8A2425039A7500FD4959 /* AppDelegate.swift */,
 				075F3AD31DB0FFE100831312 /* Info.plist */,
-				075F3AC21DB0FFE100831312 /* Supporting Files */,
 				075F3AF51DB1001D00831312 /* PalringoPhotos-Bridging-Header.h */,
 			);
 			path = PalringoPhotos;
-			sourceTree = "<group>";
-		};
-		075F3AC21DB0FFE100831312 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				075F3AC31DB0FFE100831312 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		075F3ADB1DB0FFE100831312 /* PalringoPhotosTests */ = {
@@ -176,6 +173,92 @@
 				075F3AE91DB0FFE100831312 /* Info.plist */,
 			);
 			path = PalringoPhotosUITests;
+			sourceTree = "<group>";
+		};
+		FA0EBA082503AB2B00D74097 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				FA77CD6B24F12A7100068B1B /* PhotographersInstance.swift */,
+				07F2581C1DB3B5400077EACA /* Photo.swift */,
+				07F258201DB3BA8F0077EACA /* PhotoComment.swift */,
+			);
+			name = Items;
+			sourceTree = "<group>";
+		};
+		FA0EBA092503AC7900D74097 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B8A222503977400FD4959 /* Coordinator.swift */,
+			);
+			name = Coordinators;
+			sourceTree = "<group>";
+		};
+		FA0EBA0A2503ACC400D74097 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				075F3ACB1DB0FFE100831312 /* Main.storyboard */,
+				075F3AD01DB0FFE100831312 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		FA0EBA0B2503ACDF00D74097 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				075F3ACE1DB0FFE100831312 /* Assets.xcassets */,
+				FA0EBA0A2503ACC400D74097 /* Storyboards */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FA0EBA0C2503B23700D74097 /* Datasources */ = {
+			isa = PBXGroup;
+			children = (
+				075F3AF81DB100EF00831312 /* ImageDataSource.swift */,
+				FA0EBA0D2503B29200D74097 /* CommentDataSource.swift */,
+			);
+			name = Datasources;
+			sourceTree = "<group>";
+		};
+		FA0EBA0F2503B38800D74097 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				07F2581E1DB3B66A0077EACA /* PhotoCell.swift */,
+				FA0EBA102503B3A100D74097 /* CommentCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		FA4B8A2125038F9200FD4959 /* Utils+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FA4B8A1F25038F0600FD4959 /* UIView+Extensions.swift */,
+				FA77CD6D24F1318C00068B1B /* UIImageView+Extensions.swift */,
+				FA77CD7124F1375900068B1B /* String+Extensions.swift */,
+				FA0EBA062503AA6300D74097 /* NSMutableAttributedString+Extensions.swift */,
+			);
+			name = "Utils+Extensions";
+			sourceTree = "<group>";
+		};
+		FA4B8A262503A30200FD4959 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA77CD6924F122AC00068B1B /* PhotographerListViewController.swift */,
+				FA4B8A1D25038D0800FD4959 /* PhotoDetailsViewController.swift */,
+				FA77CD6F24F1344400068B1B /* CommentsDetailsViewController.swift */,
+				075F3AF61DB1001D00831312 /* PhotoCollectionViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FA4B8A272503A7EB00FD4959 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA0EBA0F2503B38800D74097 /* Cells */,
+				FA4B8A282503A7F700FD4959 /* CommentView.swift */,
+				B5586B501DB153B800E82C9B /* GradientView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,21 +396,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA4B8A292503A7F700FD4959 /* CommentView.swift in Sources */,
 				FA77CD6E24F1318C00068B1B /* UIImageView+Extensions.swift in Sources */,
 				07F2581D1DB3B5400077EACA /* Photo.swift in Sources */,
+				FA0EBA072503AA6300D74097 /* NSMutableAttributedString+Extensions.swift in Sources */,
+				FA4B8A2525039A7500FD4959 /* AppDelegate.swift in Sources */,
 				07F2581F1DB3B66A0077EACA /* PhotoCell.swift in Sources */,
 				07F258211DB3BA8F0077EACA /* PhotoComment.swift in Sources */,
-				075F3AC71DB0FFE100831312 /* AppDelegate.m in Sources */,
+				FA4B8A1E25038D0800FD4959 /* PhotoDetailsViewController.swift in Sources */,
+				FA0EBA0E2503B29200D74097 /* CommentDataSource.swift in Sources */,
+				FA4B8A2025038F0600FD4959 /* UIView+Extensions.swift in Sources */,
 				075F3AF71DB1001D00831312 /* PhotoCollectionViewController.swift in Sources */,
+				FA4B8A232503977400FD4959 /* Coordinator.swift in Sources */,
 				FA77CD6C24F12A7100068B1B /* PhotographersInstance.swift in Sources */,
 				B5586B511DB153B800E82C9B /* GradientView.swift in Sources */,
 				075F3AF91DB100EF00831312 /* ImageDataSource.swift in Sources */,
+				FA0EBA132503C8B700D74097 /* CacheComments.swift in Sources */,
 				B59C06221DB16D3500425848 /* CachedRequest.swift in Sources */,
 				FA77CD7224F1375900068B1B /* String+Extensions.swift in Sources */,
 				FA77CD6A24F122AC00068B1B /* PhotographerListViewController.swift in Sources */,
 				FA77CD7024F1344400068B1B /* CommentsDetailsViewController.swift in Sources */,
-				075F3AC41DB0FFE100831312 /* main.m in Sources */,
 				075F3AFB1DB128A400831312 /* FlickrFetcher.swift in Sources */,
+				FA0EBA112503B3A100D74097 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
