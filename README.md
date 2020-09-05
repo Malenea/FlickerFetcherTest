@@ -2,6 +2,6 @@
 
 ### Notes on things to be done or improved:
 
-- Change UIStackView to UITableView for comments section and implement a caching system just like the one for photos fetching.
-- Created a back arrow for ccomment sections so it could still be used with < iOS13 devices. Remove the arrow for iOS13+ and adapt the constraints accordingly.
-- Create a coordinator on top to manage push to navigation controller instead of push/present from the current collection view
+- Implement unit tests. Right now they were evicted as the subject was to fix and improve the current code in the minimum time possible. But unit and UI tests would still be an essential add to the test.
+- Some classes could and should be more generic through conforming to protocols to respect the non dependency between objects at different levels.
+- Architecture design could and should be remade as right now, it's not completely refined and has some not so optimized implementations.
